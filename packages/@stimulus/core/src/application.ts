@@ -25,6 +25,7 @@ export class Application implements ErrorHandler {
   }
 
   async start() {
+    //等待页面完全加载完成
     await domReady()
     this.router.start()
     this.dispatcher.start()

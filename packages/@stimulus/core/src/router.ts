@@ -15,6 +15,7 @@ export class Router implements ScopeObserverDelegate {
 
   constructor(application: Application) {
     this.application = application
+    // 绑定最顶层的元素
     this.scopeObserver = new ScopeObserver(this.element, this.schema, this)
     this.scopesByIdentifier = new Multimap
     this.modulesByIdentifier = new Map

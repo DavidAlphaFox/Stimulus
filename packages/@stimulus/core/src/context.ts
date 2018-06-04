@@ -12,7 +12,8 @@ export class Context implements ErrorHandler {
   readonly scope: Scope
   readonly controller: Controller
   private bindingObserver: BindingObserver
-
+  //将模块和scope进行关联
+  //每个Context都会有一个自己的绑定监听器
   constructor(module: Module, scope: Scope) {
     this.module = module
     this.scope = scope
