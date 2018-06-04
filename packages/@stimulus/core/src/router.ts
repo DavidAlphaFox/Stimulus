@@ -87,8 +87,9 @@ export class Router implements ScopeObserverDelegate {
   }
 
   /** @private */
+
   scopeDisconnected(scope: Scope) {
-    this.scopesByIdentifier.delete(scope.identifier, scope)
+    this.scopesByIdentifier.delete(scope.identifier, scope
     const module = this.modulesByIdentifier.get(scope.identifier)
     if (module) {
       module.disconnectContextForScope(scope)

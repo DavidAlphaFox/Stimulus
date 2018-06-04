@@ -49,7 +49,7 @@ export class TokenListObserver implements AttributeObserverDelegate {
   }
 
   // Attribute observer delegate
-
+  // 匹配element
   elementMatchedAttribute(element: Element) {
     this.tokensMatched(this.readTokensForElement(element))
   }

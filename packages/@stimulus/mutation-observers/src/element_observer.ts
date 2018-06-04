@@ -65,7 +65,7 @@ export class ElementObserver {
       }
     }
   }
-
+// 处理H5当中的 MutationRecord
   private processMutation(mutation: MutationRecord) {
     if (mutation.type == "attributes") {
       this.processAttributeChange(mutation.target, mutation.attributeName!)
@@ -137,7 +137,7 @@ export class ElementObserver {
   }
 
   // Element tracking
-
+ // 添加一个全新的节点，会调用delegate进行处理
   private addElement(element: Element) {
     if (!this.elements.has(element)) {
       if (this.elementIsActive(element)) {

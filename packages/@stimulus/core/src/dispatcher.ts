@@ -55,8 +55,11 @@ export class Dispatcher implements BindingObserverDelegate {
   }
 
   private fetchEventListener(eventTarget: EventTarget, eventName: string): EventListener {
-    const eventListenerMap = this.fetchEventListenerMapForEventTarget(eventTarget)
-    let eventListener = eventListenerMap.get(eventName)
+      // 得到事件所有的监听者
+      const eventListenerMap = this.fetchEventListenerMapForEventTarget(eventTarget)
+      // 如果从监听事件Map中得到相应的listener就直接返回
+      // 不存在的时候，就直接创建一个全新的listener
+      let eventListener = eventListenerMap.get(eventName)
     if (!eventListener) {
       eventListener = this.createEventListener(eventTarget, eventName)
       eventListenerMap.set(eventName, eventListener)
@@ -71,7 +74,8 @@ export class Dispatcher implements BindingObserverDelegate {
     }
     return eventListener
   }
-
+    //使用一个两级Map，第一级的Map的key是事件对象
+    //第二级的Map的key是事件名
   private fetchEventListenerMapForEventTarget(eventTarget: EventTarget): Map<string, EventListener> {
     let eventListenerMap = this.eventListenerMaps.get(eventTarget)
     if (!eventListenerMap) {

@@ -1,5 +1,6 @@
 import { Binding } from "./binding"
-
+// 直接实现EventListenerObject的相应接口
+// connect的时候就是在EventTarget上添加H5的事件
 export class EventListener implements EventListenerObject {
   readonly eventTarget: EventTarget
   readonly eventName: string
@@ -19,8 +20,10 @@ export class EventListener implements EventListenerObject {
     this.eventTarget.removeEventListener(this.eventName, this, false)
   }
 
-  // Binding observer delegate
-
+    // Binding observer delegate
+    // 为当前事件添加一个binding，这样就能做到一个事件对象
+    // 上的某个事件可以被多个监听者监听
+   
   bindingConnected(binding: Binding) {
     this.unorderedBindings.add(binding)
   }
@@ -30,14 +33,19 @@ export class EventListener implements EventListenerObject {
   }
 
   handleEvent(event: Event) {
-    const extendedEvent = extendEvent(event)
-    for (const binding of this.bindings) {
-      if (extendedEvent.immediatePropagationStopped) {
-        break
-      } else {
-        binding.handleEvent(extendedEvent)
+      // 扩展事件对象，增加immediatePropagationStopped属性
+      // 和stopImmediatePropagation的函数
+      // 用来结束事件冒泡
+      const extendedEvent = extendEvent(event)
+      // 遍历所有的binding
+      // 使用每个binding处理事件
+      for (const binding of this.bindings) {
+          if (extendedEvent.immediatePropagationStopped) {
+              break
+          } else {
+              binding.handleEvent(extendedEvent)
+          }
       }
-    }
   }
 
   get bindings(): Binding[] {

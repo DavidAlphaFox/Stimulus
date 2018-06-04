@@ -54,7 +54,7 @@ export class AttributeObserver implements ElementObserverDelegate {
     const matches = Array.from(tree.querySelectorAll(this.selector))
     return match.concat(matches)
   }
-
+    // 当新的node加入到DOM当中
   elementMatched(element: Element) {
     if (this.delegate.elementMatchedAttribute) {
       this.delegate.elementMatchedAttribute(element, this.attributeName)
