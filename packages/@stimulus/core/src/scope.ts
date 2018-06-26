@@ -21,7 +21,7 @@ export class Scope {
   findElement(selector: string): Element | undefined {
     return this.findAllElements(selector)[0]
   }
-
+  //从Controller所在的DOM节点内寻找
   findAllElements(selector: string): Element[] {
     const head = this.element.matches(selector) ? [this.element] : []
     const tail = this.filterElements(Array.from(this.element.querySelectorAll(selector)))

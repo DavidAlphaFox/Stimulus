@@ -34,7 +34,7 @@ export class TargetSet {
     const selector = this.getSelectorForTargetNames(targetNames)
     return this.scope.findAllElements(selector)
   }
-
+  // 构建target的HTML5的selector
   private getSelectorForTargetNames(targetNames: string[]): string {
     return targetNames.map(targetName => this.getSelectorForTargetName(targetName)).join(", ")
   }
