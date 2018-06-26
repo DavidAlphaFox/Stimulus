@@ -79,7 +79,7 @@ export class Router implements ScopeObserverDelegate {
   // Scope observer delegate
 
   /** @private */
-  scopeConnected(scope: Scope) {
+  scopeConnected(scope: Scope) { //controller和scope已经完成了关联
     this.scopesByIdentifier.add(scope.identifier, scope)
     const module = this.modulesByIdentifier.get(scope.identifier)
     if (module) {

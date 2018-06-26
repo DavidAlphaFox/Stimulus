@@ -12,7 +12,7 @@ export class Module {
 
   constructor(application: Application, definition: Definition) {
     this.application = application
-    this.definition = blessDefinition(definition)
+    this.definition = blessDefinition(definition) // 注入targets相关函数
     this.contextsByScope = new WeakMap
     this.connectedContexts = new Set
   }
@@ -30,7 +30,7 @@ export class Module {
   }
 
   connectContextForScope(scope: Scope) {
-    const context = this.fetchContextForScope(scope)
+    const context = this.fetchContextForScope(scope) // 获取Context
     this.connectedContexts.add(context)
     context.connect()
   }

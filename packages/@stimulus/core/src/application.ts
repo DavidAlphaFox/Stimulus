@@ -18,7 +18,7 @@ export class Application implements ErrorHandler {
   }
 
   constructor(element: Element = document.documentElement, schema: Schema = defaultSchema) {
-    this.element = element
+    this.element = element // 默认是针对整个html对象
     this.schema = schema
     this.dispatcher = new Dispatcher(this)
     this.router = new Router(this)

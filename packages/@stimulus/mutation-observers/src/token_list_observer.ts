@@ -63,7 +63,7 @@ export class TokenListObserver implements AttributeObserverDelegate {
   elementUnmatchedAttribute(element: Element) {
     this.tokensUnmatched(this.tokensByElement.getValuesForKey(element))
   }
-
+  // 调用delegate来进一步处理
   private tokensMatched(tokens: Token[]) {
     tokens.forEach(token => this.tokenMatched(token))
   }

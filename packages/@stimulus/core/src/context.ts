@@ -18,7 +18,7 @@ export class Context implements ErrorHandler {
     this.module = module
     this.scope = scope
     this.bindingObserver = new BindingObserver(this, this.dispatcher)
-
+    // 对data-action进行监听
     try {
       this.controller = new module.controllerConstructor(this)
       this.controller.initialize()
@@ -29,7 +29,7 @@ export class Context implements ErrorHandler {
 
   connect() {
     this.bindingObserver.start()
-
+    // 开始监听事件
     try {
       this.controller.connect()
     } catch (error) {
@@ -39,7 +39,7 @@ export class Context implements ErrorHandler {
 
   disconnect() {
     try {
-      this.controller.disconnect()
+      this.controller.disconnect() // 调用cotroller的disconnect方法
     } catch (error) {
       this.handleError(error, "disconnecting controller")
     }

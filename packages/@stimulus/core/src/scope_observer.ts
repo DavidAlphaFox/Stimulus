@@ -15,7 +15,7 @@ export class ScopeObserver implements ValueListObserverDelegate<Scope> {
   private valueListObserver: ValueListObserver<Scope>
   private scopesByIdentifierByElement: WeakMap<Element, Map<string, Scope>>
   private scopeReferenceCounts: WeakMap<Scope, number>
-
+  //传入data-controller这个attribute，让ValueListObserver来关注
   constructor(element: Element, schema: Schema, delegate: ScopeObserverDelegate) {
     this.element = element
     this.schema = schema
@@ -40,9 +40,9 @@ export class ScopeObserver implements ValueListObserverDelegate<Scope> {
   // Value observer delegate
 
   parseValueForToken(token: Token): Scope | undefined {
-    const { element, content: identifier } = token
-    const scopesByIdentifier = this.fetchScopesByIdentifierForElement(element)
-
+    const { element, content: identifier } = token // content 是 controller的逻辑名称
+    const scopesByIdentifier = this.fetchScopesByIdentifierForElement(element) 
+    // 创建一个map来保存element上controller和scop的关系，也就是说一个element上可以附加多个controller
     let scope = scopesByIdentifier.get(identifier)
     if (!scope) {
       scope = new Scope(this.schema, identifier, element)

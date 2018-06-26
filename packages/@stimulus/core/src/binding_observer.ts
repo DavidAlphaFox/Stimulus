@@ -84,7 +84,7 @@ export class BindingObserver implements ValueListObserverDelegate<Action> {
       return action
     }
   }
-
+  
   elementMatchedValue(element: Element, action: Action) {
     this.connectAction(action)
   }

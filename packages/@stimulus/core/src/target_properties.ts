@@ -23,10 +23,10 @@ export function defineTargetProperties(constructor: Function) {
       }
     }
   }))
-}
-
+}// 注入Taget和Targets等方法
+// 找出所有targets属性
 function getTargetNamesForConstructor(constructor: Function) {
-  const ancestors = getAncestorsForConstructor(constructor)
+  const ancestors = getAncestorsForConstructor(constructor) // 逐层遍历找到所有继承结构
   return Array.from(ancestors.reduce((targetNames, constructor) => {
     getOwnTargetNamesForConstructor(constructor).forEach(name => targetNames.add(name))
     return targetNames

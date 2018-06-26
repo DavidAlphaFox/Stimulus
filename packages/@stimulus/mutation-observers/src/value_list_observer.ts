@@ -50,7 +50,7 @@ export class ValueListObserver<T> implements TokenListObserverDelegate {
 
   tokenMatched(token: Token) {
     const { element } = token
-    const { value } = this.fetchParseResultForToken(token)
+    const { value } = this.fetchParseResultForToken(token) //缓存上层解析的数据
     if (value) {
       this.fetchValuesByTokenForElement(element).set(token, value)
       this.delegate.elementMatchedValue(element, value)

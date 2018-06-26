@@ -21,7 +21,7 @@ export class ElementObserver {
     this.delegate = delegate
 
     this.elements = new Set
-    this.mutationObserver = new MutationObserver((mutations) => this.processMutations(mutations))
+    this.mutationObserver = new MutationObserver((mutations) => this.processMutations(mutations))//DOM树变化监听
   }
 
   start() {
@@ -57,7 +57,7 @@ export class ElementObserver {
   }
 
   // Mutation record processing
-
+  // 处理DOM的变化
   private processMutations(mutations: MutationRecord[]) {
     if (this.started) {
       for (const mutation of mutations) {
@@ -67,9 +67,9 @@ export class ElementObserver {
   }
 // 处理H5当中的 MutationRecord
   private processMutation(mutation: MutationRecord) {
-    if (mutation.type == "attributes") {
-      this.processAttributeChange(mutation.target, mutation.attributeName!)
-    } else if (mutation.type == "childList") {
+    if (mutation.type == "attributes") { // 节点属性发生了变化
+      this.processAttributeChange(mutation.target, mutation.attributeName!) 
+    } else if (mutation.type == "childList") { //DOM的子节点发生了变化
       this.processRemovedNodes(mutation.removedNodes)
       this.processAddedNodes(mutation.addedNodes)
     }
@@ -77,13 +77,13 @@ export class ElementObserver {
 
   private processAttributeChange(node: Node, attributeName: string) {
     const element = node as Element
-    if (this.elements.has(element)) {
+    if (this.elements.has(element)) { // 如果我们的elements中存有element
       if (this.delegate.elementAttributeChanged && this.matchElement(element)) {
         this.delegate.elementAttributeChanged(element, attributeName)
       } else {
         this.removeElement(element)
       }
-    } else if (this.matchElement(element)) {
+    } else if (this.matchElement(element)) {//不存在但是可以匹配
       this.addElement(element)
     }
   }

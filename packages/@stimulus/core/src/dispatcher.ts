@@ -2,7 +2,7 @@ import { Application } from "./application"
 import { Binding } from "./binding"
 import { BindingObserverDelegate } from "./binding_observer"
 import { EventListener } from "./event_listener"
-
+//所有的事件都在此处管理
 export class Dispatcher implements BindingObserverDelegate {
   readonly application: Application
   private eventListenerMaps: Map<EventTarget, Map<string, EventListener>>
@@ -34,7 +34,7 @@ export class Dispatcher implements BindingObserverDelegate {
   }
 
   // Binding observer delegate
-
+  // 每个Controller的Action解析完成了都会在这里进行关联
   bindingConnected(binding: Binding) {
     this.fetchEventListenerForBinding(binding).bindingConnected(binding)
   }

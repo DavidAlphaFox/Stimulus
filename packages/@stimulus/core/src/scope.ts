@@ -9,7 +9,7 @@ export class Scope {
   readonly element: Element
   readonly targets: TargetSet
   readonly data: DataMap
-
+  //schema是attribute的定义，identifier是controller名称，element是controller所在的DOM节点
   constructor(schema: Schema, identifier: string, element: Element) {
     this.schema = schema
     this.identifier = identifier

@@ -1,8 +1,8 @@
 import { ControllerConstructor } from "./controller"
 
 export interface Definition {
-  identifier: string
-  controllerConstructor: ControllerConstructor
+  identifier: string //从controller和路径来的
+  controllerConstructor: ControllerConstructor // 类构建函数
 }
 
 export function blessDefinition(definition: Definition): Definition {
@@ -41,8 +41,8 @@ const extend = (() => {
 
   try {
     testReflectExtension()
-    return extendWithReflect
+    return extendWithReflect // 看是否支反射，如果支持反射就返回这个函数
   } catch (error) {
-    return (constructor) => class Controller extends constructor {}
+    return (constructor) => class Controller extends constructor {} //如果不支持反射，就直接extends构建函数
   }
 })()
