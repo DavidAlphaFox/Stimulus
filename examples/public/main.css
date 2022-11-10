@@ -1,0 +1,78 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+*:not(:active) {
+  color: #333;
+}
+
+a:active {
+  color: #333;
+}
+
+body {
+  background: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  padding: 2ex 0;
+  line-height: 1.5;
+}
+
+p {
+  margin-bottom: 2ex;
+}
+
+textarea {
+  resize: none;
+}
+
+button,
+input,
+textarea {
+  background: #fff;
+  border: 0.25ex solid #333;
+  border-radius: 0.5em;
+  margin: 0.5ex 0.5em;
+  padding: 0.5ex 0.5em;
+  font-family: inherit;
+  font-size: 16px;
+  box-shadow: 0 0 0 0.5ex rgba(0, 0, 0, 0.25);
+  vertical-align: middle;
+}
+
+button {
+  background: #ccc;
+  border-left-color: #fff;
+  border-top-color: #fff;
+}
+
+button:active {
+  border-left-color: #333;
+  border-top-color: #333;
+  border-bottom-color: #ccc;
+  border-right-color: #ccc;
+  color: #333;
+  padding: calc(0.5ex + 1px) calc(0.5em - 1px) calc(0.5ex - 1px) calc(0.5em + 1px);
+  margin: calc(0.5ex - 1px) calc(0.5em + 1px) calc(0.5ex + 1px) calc(0.5em - 1px);
+  transform: translate(1px, 1px);
+}
+
+button:active,
+button:focus {
+  outline: none;
+}
+
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 0.5ex rgba(0, 51, 255, 0.5);
+}
+
+input,
+textarea {
+  border-bottom-color: #ccc;
+  border-right-color: #ccc;
+}

@@ -1,34 +1,62 @@
 {
   "name": "stimulus",
-  "version": "1.0.1",
+  "version": "3.1.1",
   "description": "Stimulus JavaScript framework",
-  "repository": "https://github.com/stimulusjs/stimulus",
+  "repository": "https://stimulus.hotwired.dev",
   "author": "Basecamp, LLC",
   "contributors": [
     "David Heinemeier Hansson <david@basecamp.com>",
     "Javan Makhmali <javan@javan.us>",
     "Sam Stephenson <sstephenson@gmail.com>"
   ],
-  "main": "dist/stimulus.umd.js",
-  "module": "index.js",
+  "module": "./dist/stimulus.js",
+  "main": "./dist/stimulus.umd.js",
+  "types": "./index.d.ts",
+  "exports": {
+    ".": {
+      "main": "./dist/stimulus.umd.js",
+      "browser": "./dist/stimulus.js",
+      "import": "./dist/stimulus.js",
+      "module": "./dist/stimulus.js",
+      "umd": "./dist/stimulus.umd.js",
+      "types": "./index.d.ts"
+    },
+    "./webpack-helpers": {
+      "main": "./dist/webpack-helpers.umd.js",
+      "browser": "./dist/webpack-helpers.js",
+      "import": "./dist/webpack-helpers.js",
+      "module": "./dist/webpack-helpers.js",
+      "umd": "./dist/webpack-helpers.umd.js",
+      "types": "./webpack-helpers.d.ts"
+    }
+  },
+  "files": [
+    "index.d.ts",
+    "dist/stimulus.js",
+    "dist/stimulus.umd.js",
+    "webpack-helpers.js",
+    "webpack-helpers.d.ts",
+    "dist/webpack-helpers.js",
+    "dist/webpack-helpers.umd.js",
+    "README.md"
+  ],
   "license": "MIT",
   "dependencies": {
-    "@stimulus/core": "^1.0.1",
-    "@stimulus/webpack-helpers": "^1.0.0"
+    "@hotwired/stimulus": "^3.1.1",
+    "@hotwired/stimulus-webpack-helpers": "^1.0.0"
+  },
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "^13.0.0",
+    "@rollup/plugin-typescript": "^8.2.1",
+    "rollup": "^2.53"
   },
   "scripts": {
-    "prepack": "cp ../../README.md .",
-    "prepublishOnly": "yarn run build",
-    "clean": "rimraf dist",
+    "clean": "rm -rf dist",
     "build": "rollup --config rollup.config.js",
-    "watch": "rollup --config rollup.config.js --watch"
+    "prerelease": "yarn build && git --no-pager diff && echo && npm pack --dry-run",
+    "release": "npm publish"
   },
   "publishConfig": {
     "access": "public"
-  },
-  "devDependencies": {
-    "rollup": "^0.58.2",
-    "rollup-plugin-node-resolve": "^3.3.0",
-    "rollup-plugin-uglify": "^3.0.0"
   }
 }

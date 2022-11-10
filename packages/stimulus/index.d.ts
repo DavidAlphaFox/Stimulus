@@ -1,2 +1,2 @@
-export * from "@stimulus/core"
-export * from "@stimulus/webpack-helpers"
+export * from "@hotwired/stimulus"
+export as namespace Stimulus

@@ -1,1 +1,1 @@
-export * from "@stimulus/webpack-helpers"
+export * from "@hotwired/stimulus-webpack-helpers"

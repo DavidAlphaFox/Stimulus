@@ -1,30 +1,40 @@
-import resolve from "rollup-plugin-node-resolve"
-import uglify from "rollup-plugin-uglify"
-import { version } from "../../lerna.json"
+import resolve from "@rollup/plugin-node-resolve"
 
-const year = new Date().getFullYear()
-const banner = `/*\nStimulus ${version}\nCopyright © ${year} Basecamp, LLC\n */`
-
-const uglifyOptions = {
-  mangle: false,
-  compress: false,
-  output: {
-    beautify: true,
-    indent_level: 2,
-    comments: /Copyright/
-  }
-}
-
-export default {
-  input: "index.js",
-  output: {
-    file: "dist/stimulus.umd.js",
-    format: "umd",
-    name: "Stimulus",
-    banner
+export default [
+  {
+    input: "index.js",
+    output: [
+      {
+        name: "Stimulus",
+        file: "dist/stimulus.umd.js",
+        format: "umd"
+      },
+      {
+        file: "dist/stimulus.js",
+        format: "es"
+      },
+    ],
+    context: "window",
+    plugins: [
+      resolve()
+    ]
   },
-  plugins: [
-    resolve(),
-    uglify(uglifyOptions)
-  ]
-}
+  {
+    input: "webpack-helpers.js",
+    output: [
+      {
+        name: "StimulusWebpackHelpers",
+        file: "dist/webpack-helpers.umd.js",
+        format: "umd"
+      },
+      {
+        file: "dist/webpack-helpers.js",
+        format: "es"
+      },
+    ],
+    context: "window",
+    plugins: [
+      resolve()
+    ]
+  }
+]
