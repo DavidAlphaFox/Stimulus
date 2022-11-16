@@ -29,8 +29,8 @@ export class ElementObserver {
   start() {
     if (!this.started) {
       this.started = true
-      this.mutationObserver.observe(this.element, this.mutationObserverInit)
-      this.refresh()
+      this.mutationObserver.observe(this.element, this.mutationObserverInit)//启动DOM监控
+      this.refresh() //立刻更新element内所有的元素，构建相对应的树
     }
   }
 
