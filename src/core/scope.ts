@@ -5,7 +5,7 @@ import { Logger } from "./logger"
 import { Schema } from "./schema"
 import { attributeValueContainsToken } from "./selectors"
 import { TargetSet } from "./target_set"
-
+//Scope相当贯穿所有observer的一个context
 export class Scope {
   readonly schema: Schema
   readonly element: Element

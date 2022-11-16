@@ -43,8 +43,8 @@ export class ScopeObserver implements ValueListObserverDelegate<Scope> {
   parseValueForToken(token: Token): Scope | undefined {
     const { element, content: identifier } = token // content 是 controller的逻辑名称
     const scopesByIdentifier = this.fetchScopesByIdentifierForElement(element) 
-    // 创建一个map来保存element上controller和scop的关系，也就是说一个element上可以附加多个controller
-    let scope = scopesByIdentifier.get(identifier)
+    // 创建一个map来保存element上controller和scope的关系，也就是说一个element上可以附加多个controller
+    let scope = scopesByIdentifier.get(identifier) //从identifier到实体对象映射的表中，找出scope
     if (!scope) {
       scope = this.delegate.createScopeForElementAndIdentifier(element, identifier)
       scopesByIdentifier.set(identifier, scope)
@@ -52,12 +52,12 @@ export class ScopeObserver implements ValueListObserverDelegate<Scope> {
 
     return scope
   }
-
+  //因为scope是通过上层的createScopeForElementAndIdentifier创建的，其中包含了element,所以同一个controller的scope是存在多个实例的
   elementMatchedValue(element: Element, value: Scope) {
     const referenceCount = (this.scopeReferenceCounts.get(value) || 0) + 1
     this.scopeReferenceCounts.set(value, referenceCount)
     if (referenceCount == 1) {
-      this.delegate.scopeConnected(value)
+      this.delegate.scopeConnected(value)  
     }
   }
 
@@ -73,8 +73,8 @@ export class ScopeObserver implements ValueListObserverDelegate<Scope> {
 
   private fetchScopesByIdentifierForElement(element: Element) {
     let scopesByIdentifier = this.scopesByIdentifierByElement.get(element)
-    if (!scopesByIdentifier) {
-      scopesByIdentifier = new Map()
+    if (!scopesByIdentifier) {//如果没有找到对应的identifier
+      scopesByIdentifier = new Map() //创建一个identifier
       this.scopesByIdentifierByElement.set(element, scopesByIdentifier)
     }
     return scopesByIdentifier

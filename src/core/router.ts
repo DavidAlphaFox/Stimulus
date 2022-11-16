@@ -79,11 +79,11 @@ export class Router implements ScopeObserverDelegate {
   }
 
   // Scope observer delegate
-
+  //创建Scope
   createScopeForElementAndIdentifier(element: Element, identifier: string) {
     return new Scope(this.schema, element, identifier, this.logger)
   }
-
+  //Scope开始建立链接了
   scopeConnected(scope: Scope) {
     this.scopesByIdentifier.add(scope.identifier, scope)
     const module = this.modulesByIdentifier.get(scope.identifier)
@@ -91,7 +91,7 @@ export class Router implements ScopeObserverDelegate {
       module.connectContextForScope(scope)
     }
   }
-
+  //Scope删除链接
   scopeDisconnected(scope: Scope) {
     this.scopesByIdentifier.delete(scope.identifier, scope
     const module = this.modulesByIdentifier.get(scope.identifier)

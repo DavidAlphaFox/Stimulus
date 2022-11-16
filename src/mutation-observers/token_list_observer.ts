@@ -57,7 +57,7 @@ export class TokenListObserver implements AttributeObserverDelegate {
   elementMatchedAttribute(element: Element) {
     this.tokensMatched(this.readTokensForElement(element))
   }
-
+  //当元素的上的属性发生了变化，需要对其进行相应的建立关系和解除关系
   elementAttributeValueChanged(element: Element) {
     const [unmatchedTokens, matchedTokens] = this.refreshTokensForElement(element)
     this.tokensUnmatched(unmatchedTokens)
@@ -83,7 +83,7 @@ export class TokenListObserver implements AttributeObserverDelegate {
 
   private tokenUnmatched(token: Token) {
     this.delegate.tokenUnmatched(token)
-    this.tokensByElement.delete(token.element, token)
+    this.tokensByElement.delete(token.element, token) //从tokens列表中删除
   }
 
   private refreshTokensForElement(element: Element): [Token[], Token[]] {
@@ -91,10 +91,10 @@ export class TokenListObserver implements AttributeObserverDelegate {
     const currentTokens = this.readTokensForElement(element)
     const firstDifferingIndex = zip(previousTokens, currentTokens).findIndex(
       ([previousToken, currentToken]) => !tokensAreEqual(previousToken, currentToken)
-    )
+    )//找到第一个内容不同的数组index
 
     if (firstDifferingIndex == -1) {
-      return [[], []]
+      return [[], []] //全都相同
     } else {
       return [previousTokens.slice(firstDifferingIndex), currentTokens.slice(firstDifferingIndex)]
     }

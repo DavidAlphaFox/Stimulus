@@ -8,7 +8,7 @@ import { Schema } from "./schema"
 import { Scope } from "./scope"
 import { ValueObserver } from "./value_observer"
 import { TargetObserver, TargetObserverDelegate } from "./target_observer"
-
+//Context包含了Scope，Controller等所有的数据
 export class Context implements ErrorHandler, TargetObserverDelegate {
   readonly module: Module
   readonly scope: Scope
@@ -20,7 +20,7 @@ export class Context implements ErrorHandler, TargetObserverDelegate {
   constructor(module: Module, scope: Scope) {
     this.module = module
     this.scope = scope
-    this.controller = new module.controllerConstructor(this)
+    this.controller = new module.controllerConstructor(this) //每次新建一个controller
     this.bindingObserver = new BindingObserver(this, this.dispatcher)
     this.valueObserver = new ValueObserver(this, this.controller)
     this.targetObserver = new TargetObserver(this, this)
@@ -39,7 +39,7 @@ export class Context implements ErrorHandler, TargetObserverDelegate {
     this.targetObserver.start()
 
     try {
-      this.controller.connect()
+      this.controller.connect() //调用controller的connect
       this.logDebugActivity("connect")
     } catch (error: any) {
       this.handleError(error, "connecting controller")
@@ -48,7 +48,7 @@ export class Context implements ErrorHandler, TargetObserverDelegate {
 
   disconnect() {
     try {
-      this.controller.disconnect()
+      this.controller.disconnect()  //调用controller的disconnect
       this.logDebugActivity("disconnect")
     } catch (error: any) {
       this.handleError(error, "disconnecting controller")
