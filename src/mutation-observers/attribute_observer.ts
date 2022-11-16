@@ -48,7 +48,7 @@ export class AttributeObserver implements ElementObserverDelegate {
   }
 
   // Element observer delegate
-
+  // 元素包含对应的属性名（attribute)例如 data-controller
   matchElement(element: Element): boolean {
     return element.hasAttribute(this.attributeName)
   }

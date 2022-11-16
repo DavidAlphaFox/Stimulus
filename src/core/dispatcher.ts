@@ -27,7 +27,7 @@ export class Dispatcher implements BindingObserverDelegate {
       this.eventListeners.forEach((eventListener) => eventListener.disconnect())
     }
   }
-
+  // eventListenerMaps内的values是另外一个maps
   get eventListeners(): EventListener[] {
     return Array.from(this.eventListenerMaps.values()).reduce(
       (listeners, map) => listeners.concat(Array.from(map.values())),

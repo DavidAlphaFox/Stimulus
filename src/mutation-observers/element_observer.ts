@@ -15,14 +15,15 @@ export class ElementObserver {
   private elements: Set<Element>
   private mutationObserver: MutationObserver
   private mutationObserverInit = { attributes: true, childList: true, subtree: true }
-
+  //元素观察者
   constructor(element: Element, delegate: ElementObserverDelegate) {
     this.element = element
     this.started = false
     this.delegate = delegate
 
-    this.elements = new Set()
-    this.mutationObserver = new MutationObserver((mutations) => this.processMutations(mutations))
+    this.elements = new Set() // 元素列表
+    this.mutationObserver = new MutationObserver((mutations) => this.processMutations(mutations)) 
+    //MutationObserver接口提供了监视对 DOM 树所做更改的能力，该功能是 DOM3 Events 规范的一部分。
   }
 
   start() {
@@ -89,17 +90,17 @@ export class ElementObserver {
       this.processAddedNodes(mutation.addedNodes)
     }
   }
-
+  //处理元素的属性值变化
   private processAttributeChange(node: Node, attributeName: string) {
     const element = node as Element
     if (this.elements.has(element)) { // 如果我们的elements中存有element
       if (this.delegate.elementAttributeChanged && this.matchElement(element)) {
-        this.delegate.elementAttributeChanged(element, attributeName)
+        this.delegate.elementAttributeChanged(element, attributeName) //如果delegate支持元素属性变化，并且是匹配的元素就执行此处
       } else {
-        this.removeElement(element)
+        this.removeElement(element) //从元素列别中删除此元素
       }
     } else if (this.matchElement(element)) {//不存在但是可以匹配
-      this.addElement(element)
+      this.addElement(element) //加入元素列列表
     }
   }
 

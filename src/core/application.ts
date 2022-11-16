@@ -21,7 +21,7 @@ export class Application implements ErrorHandler {
     application.start()
     return application
   }
-
+  //设置默认的元素和默认的数据标记
   constructor(element: Element = document.documentElement, schema: Schema = defaultSchema) {
     this.element = element
     this.schema = schema
@@ -109,10 +109,10 @@ export class Application implements ErrorHandler {
 
 function domReady() {
   return new Promise<void>((resolve) => {
-    if (document.readyState == "loading") {
+    if (document.readyState == "loading") {//如果状态是loading就添加一个DOM事件监听器
       document.addEventListener("DOMContentLoaded", () => resolve())
     } else {
-      resolve()
+      resolve() //如果不是loading状态，就立刻进行resolve
     }
   })
 }

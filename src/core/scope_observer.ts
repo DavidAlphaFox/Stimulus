@@ -33,7 +33,7 @@ export class ScopeObserver implements ValueListObserverDelegate<Scope> {
   stop() {
     this.valueListObserver.stop()
   }
-
+  //默认是data-controller
   get controllerAttribute() {
     return this.schema.controllerAttribute
   }
