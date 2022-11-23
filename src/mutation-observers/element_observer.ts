@@ -112,11 +112,11 @@ export class ElementObserver {
       }
     }
   }
-
+  //处理新增的节点
   private processAddedNodes(nodes: NodeList) {
-    for (const node of Array.from(nodes)) {
-      const element = this.elementFromNode(node)
-      if (element && this.elementIsActive(element)) {
+    for (const node of Array.from(nodes)) {//转换成Array进行遍历
+      const element = this.elementFromNode(node) //将Node转换成Element
+      if (element && this.elementIsActive(element)) { //是一个活跃的element
         this.processTree(element, this.addElement)
       }
     }

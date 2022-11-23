@@ -31,7 +31,7 @@ export class Router implements ScopeObserverDelegate {
   get logger() {
     return this.application.logger
   }
-
+  //获取controller的data自定义属性，默认是data-controller
   get controllerAttribute(): string {
     return this.schema.controllerAttribute
   }

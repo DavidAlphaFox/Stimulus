@@ -52,7 +52,8 @@ export class ScopeObserver implements ValueListObserverDelegate<Scope> {
 
     return scope
   }
-  //因为scope是通过上层的createScopeForElementAndIdentifier创建的，其中包含了element,所以同一个controller的scope是存在多个实例的
+  //因为scope是通过上层的createScopeForElementAndIdentifier创建的，
+  //其中包含了element,所以同一个controller的scope是存在多个实例的
   elementMatchedValue(element: Element, value: Scope) {
     const referenceCount = (this.scopeReferenceCounts.get(value) || 0) + 1
     this.scopeReferenceCounts.set(value, referenceCount)

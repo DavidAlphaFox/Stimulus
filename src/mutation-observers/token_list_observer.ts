@@ -99,7 +99,7 @@ export class TokenListObserver implements AttributeObserverDelegate {
       return [previousTokens.slice(firstDifferingIndex), currentTokens.slice(firstDifferingIndex)]
     }
   }
-
+  //在指定的element找到了特定的atrribute(data-controller，data-action等)
   private readTokensForElement(element: Element): Token[] {
     const attributeName = this.attributeName
     const tokenString = element.getAttribute(attributeName) || ""
@@ -110,7 +110,7 @@ export class TokenListObserver implements AttributeObserverDelegate {
 function parseTokenString(tokenString: string, element: Element, attributeName: string): Token[] {
   return tokenString
     .trim()
-    .split(/\s+/)
+    .split(/\s+/) //空格是分割符号
     .filter((content) => content.length)
     .map((content, index) => ({ element, attributeName, content, index }))
 }

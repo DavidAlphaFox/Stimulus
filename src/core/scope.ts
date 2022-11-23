@@ -25,12 +25,14 @@ export class Scope {
   findElement(selector: string): Element | undefined {
     return this.element.matches(selector) ? this.element : this.queryElements(selector).find(this.containsElement)
   }
-
+  
   findAllElements(selector: string): Element[] {
     return [
       ...(this.element.matches(selector) ? [this.element] : []),
       ...this.queryElements(selector).filter(this.containsElement),
-    ]
+    ] 
+    //找data-target时候，选出所有的元素，并确定是data-target的父元素是当前这个元素
+    //这样才能保证scope的嵌套不出问题
   }
 
   containsElement = (element: Element): boolean => {

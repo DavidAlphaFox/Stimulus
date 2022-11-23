@@ -52,11 +52,11 @@ export class AttributeObserver implements ElementObserverDelegate {
   matchElement(element: Element): boolean {
     return element.hasAttribute(this.attributeName)
   }
-
+  //查找一个节点及其子节点中所有含有对应属性的元素
   matchElementsInTree(tree: Element): Element[] {
     const match = this.matchElement(tree) ? [tree] : []
     const matches = Array.from(tree.querySelectorAll(this.selector))
-    return match.concat(matches)
+    return match.concat(matches) // 第一个元素一定是根节点
   }
     // 当新的node加入到DOM当中
   elementMatched(element: Element) {
